@@ -11,6 +11,7 @@ ts-node index.ts
 #### Generate protos (you don't need to do this if you clone this repo)
 
 use protoc to install temporal protos
+
 reference them from ts
 
 ```
