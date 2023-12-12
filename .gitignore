@@ -1,0 +1,9 @@
+.env
+.env.*
+.DS_Store
+node_modules
+out
+*.js
+
+# all dist directories, recursively
+**/dist/**
