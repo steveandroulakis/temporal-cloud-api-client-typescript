@@ -4,7 +4,7 @@ rough guide, todo clean up
 
 #### Run API call
 ```
-set TEMPORAL_CLOUD_API_KEY in your environment
+# set TEMPORAL_CLOUD_API_KEY in your environment
 ts-node index.ts
 ```
 
