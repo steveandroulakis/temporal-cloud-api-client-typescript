@@ -2,7 +2,7 @@
 
 import * as grpc from '@grpc/grpc-js';
 import { CloudServiceClient } from './generated/temporal/api/cloud/cloudservice/v1/service_grpc_pb';
-import { GetUsersRequest, GetUserRequest } from './generated/temporal/api/cloud/cloudservice/v1/request_response_pb';
+import { GetUsersRequest, GetUserRequest, GetUsersResponse } from './generated/temporal/api/cloud/cloudservice/v1/request_response_pb';
 
 const TemporalCloudAPIVersion = '2023-10-01-00'; // Define your API version
 const TemporalCloudAPIVersionHeader = 'temporal-cloud-api-version'; // Define the header name for the API version
@@ -32,33 +32,36 @@ const apiKey = process.env.TEMPORAL_CLOUD_API_KEY || '';
 
 const client = newConnectionWithAPIKey(addr, apiKey);
 
-// For each user, display their information and then their account access role
-const request = new GetUsersRequest();
-client.getUsers(request, (error, response) => {
-    if (error) {
-        console.error('Error:', error);
-    } else {
-        if(response) {
-            const responseObject = response.toObject();
-            console.log('Response:', responseObject);
+client.waitForReady(Date.now() + 10000, (error) => {
+    // For each user, display their information and then their account access role
+    const request = new GetUsersRequest();
+    console.log('Request:', request);
+    client.getUsers(request, (error, response) => {
+        if (error) {
+            console.error('Error:', error);
+        } else {
 
-            for (const user of responseObject.usersList) {
-                // getUser
-                const getUserRequest = new GetUserRequest();
-                getUserRequest.setUserId(user.id);
-                client.getUser(getUserRequest, (error, response) => {
-                    if (error) {
-                        console.error('Error:', error);
-                    } else {
-                        if(response) {
-                            const responseObject = response.toObject();
-                            console.log('Response:', responseObject);
-                            console.log('Access:', responseObject.user?.spec?.access?.accountAccess?.role);
+            if (response) {
+                const responseObject = response.toObject();
+                console.log('Response:', responseObject);
+
+                for (const user of responseObject.usersList) {
+                    // getUser
+                    const getUserRequest = new GetUserRequest();
+                    getUserRequest.setUserId(user.id);
+                    client.getUser(getUserRequest, (error, response) => {
+                        if (error) {
+                            console.error('Error:', error);
+                        } else {
+                            if (response) {
+                                const responseObject = response.toObject();
+                                console.log('Response:', responseObject);
+                                console.log('Access:', responseObject.user?.spec?.access?.accountAccess?.role);
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         }
-    }
-
+    });
 });
