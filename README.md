@@ -28,8 +28,6 @@ You'll need grpc-tools which is compatible with node (vs browser) js.
 
 `npm install -g grpc-tools`
 
-#### Directory to write generated code to (.js and .d.ts files)
-
 ```
 # generate Typescript from Google API protobufs (dependency)
 grpc_tools_node_protoc --js_out=import_style=commonjs,binary:./generated --grpc_out=grpc_js:./generated --plugin=protoc-gen-grpc=`which grpc_tools_node_protoc_plugin` \
