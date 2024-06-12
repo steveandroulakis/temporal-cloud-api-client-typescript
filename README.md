@@ -1,3 +1,7 @@
+# Note: This example uses an old version of the API and is out of date.
+
+For example, it doesn't incorporate this fix: https://github.com/temporalio/api-cloud/pull/28 . This sample will be updated in the future, but for now please use it as a general guide only (and with a newer version of the Temporal API)
+
 ## Temporal Cloud API Usage Example (Typescript)
 
 [Temporal Cloud Ops API](https://docs.temporal.io/cloud/api-keys)
