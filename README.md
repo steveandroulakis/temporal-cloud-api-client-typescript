@@ -1,6 +1,11 @@
 # Note: This example uses an old version of the API and is out of date.
 
-For example, it doesn't incorporate this fix: https://github.com/temporalio/api-cloud/pull/28 . This sample will be updated in the future, but for now please use it as a general guide only (and with a newer version of the Temporal API)
+For example
+* It doesn't incorporate this fix: https://github.com/temporalio/api-cloud/pull/28 .
+
+This sample will be updated in the future, but for now please use it as a general guide only (and with a newer version of the Temporal API)
+
+The sample also uses ts-proto instead of https://github.com/bufbuild/buf -- which is strongly recommended as the way to use protobufs in Typescript
 
 ## Temporal Cloud API Usage Example (Typescript)
 
